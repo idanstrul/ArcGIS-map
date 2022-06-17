@@ -1,0 +1,72 @@
+.category-list {
+    contain: var(--contentscroller_contain);
+    contain-intrinsic-size: var(--contentscroller_contain-intrinsic-size);
+    content-visibility: var(--contentscroller_content-visibility);
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(
+        --contentscroller_auto-columns,
+        calc(
+            (100% - var(--contentscroller_gap, 16px) * (var(--contentscroller_visible-items, unset) - 1)) /
+                var(--contentscroller_visible-items, unset)
+        )
+    );
+    gap: var(--contentscroller_gap, 16px);
+    grid-template-rows: var(--contentscroller_rows, none);
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    min-height: var(--contentscroller_min-height);
+    height: var(--contentscroller_height);
+    overflow: var(--contentscroller_overflow, auto hidden);
+    overscroll-behavior-inline: contain;
+    padding-block-start: var(--contentscroller_padding-block-start, unset);
+    padding-block-end: var(--contentscroller_padding-block-end, unset);
+    padding-inline-start: var(--contentscroller_padding-inline-start, var(--contentscroller_peek, 32px));
+    padding-inline-end: var(--contentscroller_padding-inline-end, var(--contentscroller_peek, 32px));
+    -webkit-scroll-padding-inline: var(--contentscroller_peek, 32px);
+    -moz-scroll-padding-inline: var(--contentscroller_peek, 32px);
+    -ms-scroll-padding-inline: var(--contentscroller_peek, 32px);
+    scroll-padding-inline: var(--contentscroller_peek, 32px);
+    -webkit-scrollbar-width: none;
+    -moz-scrollbar-width: none;
+    -ms-scrollbar-width: none;
+    scrollbar-width: none;
+    touch-action: var(--contentscroller_touch-action, pan-x pan-y pinch-zoom);
+}
+
+.category-list {
+    -webkit-scroll-snap-type: var(--contentscroller_scrollsnaptype, inline mandatory);
+    -moz-scroll-snap-type: var(--contentscroller_scrollsnaptype, inline mandatory);
+    -ms-scroll-snap-type: var(--contentscroller_scrollsnaptype, inline mandatory);
+    scroll-snap-type: var(--contentscroller_scrollsnaptype, inline mandatory);
+}
+
+.category-list {
+    --contentscroller_peek: 0 24px;
+    --contentscroller_padding-inline-start: 0;
+    --contentscroller_scroller_margin-inline-end: 20px;
+    --contentscroller_padding-inline-end: 0;
+}
+
+.category-list {
+    --chipsbar_box-shadow: unset;
+    --chipsbar_chip-spacing: 32px;
+    --chipsbar_chip-width: 56px;
+    --chipsbar_height: 78px;
+    --contentscroller_scroller_margin-inline-start: 0;
+    --contentscroller_gap: var(--chipsbar_chip-spacing);
+    --contentscroller_auto-columns: max-content;
+    --contentscroller_scrollsnaptype: none;
+    --chipsbar_underline-margin: 12px;
+    --explore-nav_padding-block-start: 20px;
+    --explore_padding-inline: 80px;
+    --gp-sidebar-top-padding: 0;
+    --navigation-bar-offset: 144px;
+    --dls19-brand-color: var(--f-k-smk-x);
+}
+
+.category-list::-webkit-scrollbar {
+    display: none;
+}

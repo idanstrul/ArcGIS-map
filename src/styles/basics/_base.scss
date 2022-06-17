@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    // It's better not to touch the default text size
+    // from here in order to save a clear ratio for
+    // to use in all other places. In this way we
+    // remmember that the rem unit is 16px.
+    // If we want to change the default font size we
+    // can do it from the body.
+
+    // font-size: 80px;
+    // font-family: cereal-w-blk;
+    // font-family: cereal-w-xbd;
+    // font-family: cereal-w-bd;
+    // font-family: cereal-w-md;
+    // font-family: cereal-w-bk;
+    // font-family: cereal-w-lt;
+
+    font-family: $font-family-default;
+    color: $font-clr-primary;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    // display: flex;
+    // align-items: center;
+    // color: $brand-clr;
+    // text-transform: lowercase;
+    // font-family: LL-Brown, sans-serif;
+    // font-size: 25px;
+    // gap: 6.29px;
+    // letter-spacing: -2px;
+
+    // span {
+    //     height: 32px;
+    //     line-height: 28px;
+    // }
+    font-family: hexagon;
+    font-size: 3rem;
+    text-transform: lowercase;
+}
+
+button,
+a {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    cursor: pointer;
+
+    // .main-header > div.controls &:not(.burger-menu-btn) {
+    //     font-weight: 600;
+    //     background: transparent;
+    //     border: 0;
+    //     cursor: pointer;
+    //     // margin: 0;
+    //     // padding: 0;
+    //     // text-align: inherit;
+    //     padding: 12px;
+    //     border-radius: 22px;
+    //     position: relative;
+    //     // z-index: 1;
+
+    //     & .container {
+    //         position: relative;
+    //     }
+
+    //     &::before {
+    //         content: "";
+    //         position: absolute;
+    //         bottom: 0;
+    //         top: 0;
+    //         left: -3px;
+    //         right: -3px;
+    //         // z-index: 0;
+    //         border-radius: 22px;
+    //     }
+
+    //     &:hover {
+    //         &::before {
+    //             background-color: $background-clr-secondary;
+    //         }
+    //     }
+
+    //     &.intl-btn {
+    //         .container {
+    //             height: 18px;
+    //             display: flex;
+    //             align-items: center;
+    //         }
+    //     }
+    // }
+
+    // &.burger-menu-btn {
+    //     display: flex;
+    //     align-items: center;
+    //     padding: 5px 5px 5px 12px;
+    //     // background: transparent;
+    //     // border: 0;
+    //     cursor: pointer;
+    //     // margin: 0;
+    //     // padding: 0;
+    //     // text-align: inherit;
+    //     background-color: $background-clr-default;
+    //     border: 1px solid $border-clr-default;
+    //     border-radius: 21px;
+    //     transition: box-shadow 0.2s ease;
+
+    //     width: 77px;
+    //     height: 42px;
+
+    //     &:hover {
+    //         box-shadow: $box-shadow-default;
+    //     }
+
+    //     .container {
+    //         width: 30px;
+    //         height: 30px;
+    //         margin-inline-start: 12px;
+    //         color: $font-clr-light;
+    //     }
+
+    //     .main-header > div.controls & {
+    //         margin-inline-start: 8px;
+    //     }
+    // }
+
+    // .category-chip & {
+    //     background-color: unset;
+    //     border: unset;
+    //     padding: 4px 0 14px;
+    //     margin: 12px 0 0;
+    //     transition: box-shadow 0.2s ease, color 0.2s ease;
+    //     color: $font-clr-light;
+    //     font-weight: 600;
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: 8px;
+    //     min-width: 56px;
+    //     align-items: center;
+    // }
+}

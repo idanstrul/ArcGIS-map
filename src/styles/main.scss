@@ -1,0 +1,24 @@
+// SETUP
+
+@import "./setup/vars";
+@import "./setup/typography";
+@import "./setup/animations";
+@import "./setup/functions";
+@import "./setup/mixins";
+@import "./setup/mq";
+
+// BASICS
+
+@import "./basics/base";
+@import "./basics/layout";
+@import "./basics/helpers";
+
+// CMPS
+
+@import "./cmps/main-header";
+@import "./cmps/stays-filter";
+@import "./cmps/secondary-header";
+@import "./cmps/category-chip";
+@import "./cmps/category-list";
+
+// PAGES

@@ -1,0 +1,35 @@
+.category-chip {
+    text-align: center;
+
+    img {
+        transition: filter 200ms ease, transform 200ms ease;
+        filter: contrast(calc(13 / 44));
+    }
+
+    button:hover {
+        color: $font-clr-contrast;
+
+        img {
+            filter: contrast(1);
+        }
+
+        div.category-name::after {
+            opacity: 1;
+        }
+    }
+
+    div.category-name {
+        position: relative;
+
+        &::after {
+            position: absolute;
+            content: "";
+            inset-inline: 0;
+            height: 2px;
+            top: calc(100% + 12px);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            background-color: $border-clr-default;
+        }
+    }
+}
