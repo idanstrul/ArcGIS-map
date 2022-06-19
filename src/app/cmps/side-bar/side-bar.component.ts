@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-side-bar',
@@ -8,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class SideBarComponent implements OnInit {
 
   constructor() { }
+
+  @Output() onPanToIsrael = new EventEmitter<void>()
+  @Output() onChangeScale = new EventEmitter<void>()
+  @Output() onReturnToPrevLocation = new EventEmitter<void>()
 
   ngOnInit(): void {
   }

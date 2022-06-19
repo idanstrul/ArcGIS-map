@@ -1,8 +1,8 @@
 <section class="app-root">
   <app-main-header></app-main-header>
   <main class="main-content main-layout flex gap-20">
-    <app-map></app-map>
-    <app-side-bar></app-side-bar>
+    <app-map [mapViewCenter]="mapViewCenter" [mapViewScale]="mapViewScale" ></app-map> <!-- [prevLocation]="prevLocation | async" -->
+    <app-side-bar (onChangeScale)="handleChangeScale()" (onPanToIsrael)="handlePanToIsrael()" (onReturnToPrevLocation)="handleReturnToPrevLocation()"></app-side-bar>
   </main>
   <app-main-footer></app-main-footer>
 </section>
