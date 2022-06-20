@@ -37,7 +37,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
   searchWidget!: widgetsSearch
 
   @Input() location: Location = null
-  @Output() onSearchResult = new EventEmitter<__esri.SearchSelectResultEvent>()
+  @Output() onSearchResult = new EventEmitter<__esri.Graphic>()
 
 
   @ViewChild('mapViewNode', { static: true }) private mapViewEl!: ElementRef;
@@ -69,7 +69,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
       view: view
     });
 
-    this.searchWidget.on("select-result", (ev) => this.onSearchResult.emit(ev))
+    this.searchWidget.on("select-result", ({ result }) => this.onSearchResult.emit(result.feature))
 
     view.ui.add(this.searchWidget, {
       position: "top-right"
@@ -79,32 +79,18 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     return this.view.when();
   }
 
-
   ngOnInit(): any {
-    // Initialize MapView and return an instance of MapView
-    this.initializeMap().then(() => {
-      // The map has been initialized
-      console.log('The map is ready.');
-    });
-
+    this.initializeMap()
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     const { currentValue } = changes['location']
-    if (currentValue?.result) this.view.goTo(currentValue.result.feature)
-    else if (Array.isArray(currentValue)) this.view.goTo(currentValue)
-    else if (typeof currentValue === 'number') this.view.goTo({ scale: currentValue })
-
-
-
-    // this.view.goTo({ target: this.mapViewCenter, scale: this.mapViewScale }, { duration: 5000 })
+    if (currentValue) this.view.goTo(currentValue, { duration: 1000 })
   }
 
   ngOnDestroy(): void {
     if (this.view) {
-      // destroy the map view
       this.view.destroy();
     }
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { exhaustMap, interval, map, Observable, take, tap } from 'rxjs';
 import { Location, MapViewService } from 'src/app/services/map-view.service';
 
 @Component({
@@ -15,29 +15,28 @@ export class AppComponent implements OnInit {
   locations$!: Observable<Location>
 
   handleChangeScale() {
-    console.log('Change Scale!');
     this.mapViewService.changeScale()
-
   }
 
   handlePanToIsrael() {
-    console.log('Pan To Israel!');
     this.mapViewService.panToIsrael()
-
   }
 
   handleReturnToPrevLocation() {
-    console.log('Return To Previous Location!');
     this.mapViewService.returnToPrevLocation()
-
   }
 
-  handleSearchResult(ev: __esri.SearchSelectResultEvent) {
+  handleSearchResult(ev: __esri.Graphic) {
     this.mapViewService.saveLocation(ev)
-
   }
 
   ngOnInit(): void {
-    this.locations$ = this.mapViewService.locations$
+    this.locations$ = this.mapViewService.locations$.pipe(
+      exhaustMap(location => interval(100).pipe(
+        take(2),
+        map(i => (i === 0) ? location : null)
+      )),
+      tap(x => console.log(x))
+    )
   }
 }

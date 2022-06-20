@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type Location = __esri.SearchSelectResultEvent | [number, number] | number | null
+export type Location = __esri.Graphic | { target?: number[], scale: number } | null
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +13,17 @@ export class MapViewService {
 
   constructor() { }
 
-  private prevLocations: __esri.SearchSelectResultEvent[] = [];
-  private israelCoordinates: [number, number] = [31.4117, 35.0818]
-  private defaultMapScale = 1000
+  private prevLocations: __esri.Graphic[] = [];
+  private israelCoordinates = { target: [35.0818, 31.4117], scale: 5000000 }
+  private defaultMapScale = { scale: 1000000 }
 
 
   changeScale() {
-    console.log('Change Scale!');
     this._locations$.next(this.defaultMapScale)
-
   }
 
   panToIsrael() {
-    console.log('Pan To Israel!');
     this._locations$.next(this.israelCoordinates)
-
   }
 
   returnToPrevLocation() {
@@ -35,9 +31,8 @@ export class MapViewService {
     this._locations$.next((prevLocation) ? prevLocation : null);
   }
 
-  saveLocation(location: __esri.SearchSelectResultEvent) {
-    console.log(location.result.feature);
-
+  saveLocation(location: __esri.Graphic) {
+    console.log(location);
     this.prevLocations.push(location)
   }
 }
