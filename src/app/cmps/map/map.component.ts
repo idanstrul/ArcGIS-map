@@ -7,6 +7,8 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  Output,
+  EventEmitter,
 } from '@angular/core';// Default import
 import WebMap from "@arcgis/core/WebMap";
 
@@ -20,6 +22,8 @@ import Search from "@arcgis/core/widgets/Search"
 import ScaleBar from "@arcgis/core/widgets/ScaleBar";
 
 import esriConfig from '@arcgis/core/config'
+import { Location } from 'src/app/services/map-view.service';
+import widgetsSearch from '@arcgis/core/widgets/Search';
 
 @Component({
   selector: 'app-map',
@@ -30,9 +34,10 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor() { }
   public view!: MapView;
+  searchWidget!: widgetsSearch
 
-  @Input() mapViewCenter: number[] = [0, 0]
-  @Input() mapViewScale: number = 1000
+  @Input() location: Location = null
+  @Output() onSearchResult = new EventEmitter<__esri.SearchSelectResultEvent>()
 
 
   @ViewChild('mapViewNode', { static: true }) private mapViewEl!: ElementRef;
@@ -60,47 +65,19 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     });
 
 
-    const searchWidget = new Search({
+    this.searchWidget = new Search({
       view: view
     });
 
-    view.ui.add(searchWidget, {
+    this.searchWidget.on("select-result", (ev) => this.onSearchResult.emit(ev))
+
+    view.ui.add(this.searchWidget, {
       position: "top-right"
     })
-
-    // const bookmarks = new Bookmarks({
-    //   view,
-    //   // allows bookmarks to be added, edited, or deleted
-    //   editingEnabled: true,
-    // });
-
-    // const bkExpand = new Expand({
-    //   view,
-    //   content: bookmarks,
-    //   expanded: true,
-
-    // });
-
-    // Add the widget to the top-right corner of the view
-    // view.ui.add(bkExpand, 'top-right');
-
-    // bonus - how many bookmarks in the webmap?
-    // webmap.when(() => {
-    //   if (webmap.bookmarks && webmap.bookmarks.length) {
-    //     console.log('Bookmarks: ', webmap.bookmarks.length);
-    //   } else {
-    //     console.log('No bookmarks in this webmap.');
-    //   }
-    // });
 
     this.view = view;
     return this.view.when();
   }
-
-  panToIsrael() {
-    return this.view.goTo({ target: [31.4117, 35.0818], scale: 100000 }, { duration: 5000 })
-  }
-
 
 
   ngOnInit(): any {
@@ -114,7 +91,15 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.view.goTo({ target: this.mapViewCenter, scale: this.mapViewScale }, { duration: 5000 })
+    console.log(changes);
+    const { currentValue } = changes['location']
+    if (currentValue?.result) this.view.goTo(currentValue.result.feature)
+    else if (Array.isArray(currentValue)) this.view.goTo(currentValue)
+    else if (typeof currentValue === 'number') this.view.goTo({ scale: currentValue })
+
+
+
+    // this.view.goTo({ target: this.mapViewCenter, scale: this.mapViewScale }, { duration: 5000 })
   }
 
   ngOnDestroy(): void {
