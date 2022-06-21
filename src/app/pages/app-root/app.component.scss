@@ -1,3 +1,8 @@
 .main-content {
-    height: calc(100vh - 47px - 80px);
+    @media (max-width: 530px) {
+        flex-direction: column;
+    }
+    @media (min-width: 531px) {
+        gap: 20px;
+    }
 }

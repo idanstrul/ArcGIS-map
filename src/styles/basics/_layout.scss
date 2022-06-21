@@ -1,10 +1,9 @@
 .main-layout {
-    max-width: $max-content-width;
-    padding-left: $main-layout-padding-m;
-    padding-right: $main-layout-padding-m;
-    @media (min-width: $desktop-l) {
-        padding-left: $main-layout-padding-l;
-        padding-right: $main-layout-padding-l;
+    padding-left: 10px;
+    padding-right: 10px;
+    @media (min-width: 530px) {
+        padding-left: 40px;
+        padding-right: 40px;
     }
     margin: auto;
 }

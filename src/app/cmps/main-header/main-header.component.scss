@@ -1,0 +1,45 @@
+.main-header {
+    position: relative;
+    min-height: 40px;
+
+    .main-nav {
+        @media (max-width: 530px) {
+            display: none;
+        }
+    }
+
+    @media (min-width: 531px) {
+        min-height: 80px;
+    }
+
+    .controls,
+    .logo {
+        flex: 1 0 140px;
+        font-family: hexagon;
+        font-size: 2rem;
+        text-transform: lowercase;
+
+        @media (min-width: 531px) {
+            font-size: 3rem;
+        }
+    }
+
+    &::after {
+        content: "";
+        // background: var(--f-mkcy-f);
+        // transform-origin: 50% 0%;
+        // box-shadow: rgb(0 0 0 / 8%) 0 1px 12px;
+        box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        // top: 0;
+        z-index: -1;
+        // opacity: 0;
+        // opacity: 1;
+        // transition: transform 150ms ease, opacity 150ms ease 75ms;
+        transition: transform 250ms ease, opacity 250ms ease;
+        left: 0;
+        right: 0;
+    }
+}

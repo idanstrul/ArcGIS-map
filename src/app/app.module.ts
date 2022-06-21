@@ -6,6 +6,7 @@ import { MainHeaderComponent } from './cmps/main-header/main-header.component';
 import { MapComponent } from './cmps/map/map.component';
 import { SideBarComponent } from './cmps/side-bar/side-bar.component';
 import { MainFooterComponent } from './cmps/main-footer/main-footer.component';
+import { BurgerMenuSvgComponent } from './cmps/burger-menu-svg/burger-menu-svg.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MainFooterComponent } from './cmps/main-footer/main-footer.component';
     MainHeaderComponent,
     MapComponent,
     SideBarComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    BurgerMenuSvgComponent
   ],
   imports: [
     BrowserModule

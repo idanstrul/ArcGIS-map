@@ -1,0 +1,6 @@
+:host {
+    display: flex;
+    @media (min-width: 531px) {
+        display: none;
+    }
+}
