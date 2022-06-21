@@ -19,6 +19,8 @@ export class MapViewService {
 
 
   changeScale() {
+    console.log('this is:', this);
+
     this._locations$.next(this.defaultMapScale)
   }
 

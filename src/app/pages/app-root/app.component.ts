@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { exhaustMap, interval, map, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, exhaustMap, interval, map, merge, observable, Observable, take, tap } from 'rxjs';
 import { Location, MapViewService } from 'src/app/services/map-view.service';
 
 @Component({
@@ -9,21 +9,32 @@ import { Location, MapViewService } from 'src/app/services/map-view.service';
 })
 export class AppComponent implements OnInit {
   title = 'Kapow-Maps-Exam';
+  isMapReady = false;
 
   constructor(private mapViewService: MapViewService) { }
 
-  locations$!: Observable<Location>
+  public locations$!: Observable<Location>
+  private _emptySubject$ = new BehaviorSubject<null>(null)
 
-  handleChangeScale() {
-    this.mapViewService.changeScale()
+
+  handleMapOperation(mapOperation: string) {
+    if (!this.isMapReady) return
+
+    switch (mapOperation) {
+      case "CHANGE_SCALE":
+        return this.mapViewService.changeScale()
+
+      case "PAN_TO_ISRAEL":
+        return this.mapViewService.panToIsrael()
+
+      case "RETURN_TO_PREV_LOCATION":
+        return this.mapViewService.returnToPrevLocation()
+    }
   }
 
-  handlePanToIsrael() {
-    this.mapViewService.panToIsrael()
-  }
-
-  handleReturnToPrevLocation() {
-    this.mapViewService.returnToPrevLocation()
+  updateMapStatus(status: boolean) {
+    this.isMapReady = status
+    if (status) this._emptySubject$.next(null)
   }
 
   handleSearchResult(ev: __esri.Graphic) {
@@ -31,12 +42,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.locations$ = this.mapViewService.locations$.pipe(
-      exhaustMap(location => interval(100).pipe(
-        take(2),
-        map(i => (i === 0) ? location : null)
-      )),
-      tap(x => console.log(x))
-    )
+    this.locations$ = merge(this.mapViewService.locations$, this._emptySubject$)
   }
 }

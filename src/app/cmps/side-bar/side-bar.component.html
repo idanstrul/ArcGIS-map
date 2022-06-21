@@ -1,5 +1,5 @@
 <section class="side-bar flex column space-around">
-    <button (click)="onPanToIsrael.emit()">Focus on Israel</button>
-    <button (click)="onChangeScale.emit()">Change scale to 1/2500</button>
-    <button (click)="onReturnToPrevLocation.emit()">Return to previous location</button>
+    <button (click)="onMapOperation.emit('PAN_TO_ISRAEL')">Focus on Israel</button>
+    <button (click)="onMapOperation.emit('CHANGE_SCALE')">Change scale to 1/2500</button>
+    <button (click)="onMapOperation.emit('RETURN_TO_PREV_LOCATION')">Return to previous location</button>
 </section>

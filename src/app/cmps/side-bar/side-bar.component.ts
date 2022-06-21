@@ -9,9 +9,7 @@ export class SideBarComponent implements OnInit {
 
   constructor() { }
 
-  @Output() onPanToIsrael = new EventEmitter<void>()
-  @Output() onChangeScale = new EventEmitter<void>()
-  @Output() onReturnToPrevLocation = new EventEmitter<void>()
+  @Output() onMapOperation = new EventEmitter<string>()
 
   ngOnInit(): void {
   }

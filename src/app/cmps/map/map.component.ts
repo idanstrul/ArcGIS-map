@@ -38,6 +38,7 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() location: Location = null
   @Output() onSearchResult = new EventEmitter<__esri.Graphic>()
+  @Output() onMapStatusUpdate = new EventEmitter<boolean>()
 
 
   @ViewChild('mapViewNode', { static: true }) private mapViewEl!: ElementRef;
@@ -79,14 +80,30 @@ export class MapComponent implements OnInit, OnDestroy, OnChanges {
     return this.view.when();
   }
 
-  ngOnInit(): any {
-    this.initializeMap()
+  async ngOnInit(): Promise<void> {
+    this.onMapStatusUpdate.emit(false)
+    try {
+      await this.initializeMap()
+      this.onMapStatusUpdate.emit(true)
+    } catch (error) {
+      console.error(error)
+      alert("OOPS! Cannot load ArcGIS map!")
+    }
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     const { currentValue } = changes['location']
-    if (currentValue) this.view.goTo(currentValue, { duration: 1000 })
+    if (currentValue) {
+      this.onMapStatusUpdate.emit(false)
+      try {
+        await this.view.goTo(currentValue, { duration: 1000 })
+        this.onMapStatusUpdate.emit(true)
+      } catch (error) {
+        console.error(error)
+        alert("OOPS! Something went wrong when executing this operation!")
+      }
+    }
   }
 
   ngOnDestroy(): void {
