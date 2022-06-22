@@ -1,8 +1,0 @@
-<section class="app-root">
-  <app-main-header></app-main-header>
-  <main class="main-content main-layout flex">
-    <app-map (onMapStatusUpdate)="updateMapStatus($event)" (onSearchResult)="handleSearchResult($event)" [location]="locations$ | async"></app-map> 
-    <app-side-bar (onMapOperation)="handleMapOperation($event)"></app-side-bar>
-  </main>
-  <app-main-footer></app-main-footer>
-</section>
